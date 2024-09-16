@@ -4,7 +4,7 @@ let computerScore = 0;
 
 function getComputerChoice(){
     let computerChoice_num = Math.floor(Math.random() * 3);
-    //console.log(computerChoice_num);
+    //alert(computerChoice_num);
     switch(computerChoice_num){
         case 0:
             return 'R';
@@ -27,20 +27,23 @@ function concat(choice){
 }
 
 function printChoices(humanChoice, computerChoice){
-    console.log(`Human Chose ${concat(humanChoice)}  vs  Computer Chose ${concat(computerChoice)}`)
+    alert(`Human Chose ${concat(humanChoice)}  vs  Computer Chose ${concat(computerChoice)}`)
 }
 
 function printScore(){
-    console.log("=>Human  vs  CPU");
-    console.log(`   ${humanScore}          ${computerScore}`);
+    alert(`=>Human  vs  CPU\n   ${humanScore}          ${computerScore}`);
 }
 
 function playRound(humanChoice, computerChoice){
 
+    if(humanChoice != 'R' && humanChoice != 'P' && humanChoice != 'S'){
+        alert("Please provide valid input"); return;
+    }
+
     printChoices(humanChoice, computerChoice);
 
     if(humanChoice === computerChoice){
-        console.log("Its a Tie!!");
+        alert("Its a Tie!!");
         return;
     }
     if(humanChoice === 'R'){
@@ -53,7 +56,7 @@ function playRound(humanChoice, computerChoice){
     }
 
     else if(humanChoice === 'S'){
-        if(computerChoice === 'R') humanScore += 1;
+        if(computerChoice === 'P') humanScore += 1;
         else computerScore += 1;
     }
 
@@ -67,7 +70,7 @@ while(humanScore < 5 && computerScore < 5){
 }
 
 if(humanScore > computerScore){
-    console.log("HUMAN WINS !!!");
+    alert("HUMAN WINS !!!");
 }
-else console.log("CPU wins...");
+else alert("CPU wins...");
 
