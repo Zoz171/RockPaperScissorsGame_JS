@@ -2,6 +2,27 @@
 let humanScore = 0;
 let computerScore = 0;
 
+let selection = {
+    'R':'🪨',
+    'P':'🧻',
+    'S':'✂️',
+    '🪨':'R',
+    '🧻':'P',
+    '✂️':'S',
+    'ROCK' :{
+        'letter': 'R',
+        'emoji': '🪨',
+    },
+    'PAPER': {
+        'letter':'P',
+        'emoji' : '🧻',
+    },
+    'SCISSORS' : {
+        'letter': 'S',
+        'emoji': '✂️',
+    },
+};
+
 function getComputerChoice(){
     let computerChoice_num = Math.floor(Math.random() * 3);
     //alert(computerChoice_num);
@@ -16,8 +37,9 @@ function getComputerChoice(){
 }
 
 function getHumanChoice() {
-    let humanChoice = prompt("Pick Rock or Paper or Scissors\n1- R for Rock\n2- P for Paper\n3- S for Scissors");
-    return humanChoice;
+    let humanChoice = document.querySelector(".player.curr");
+    // console.log(selection[humanChoice.textContent]);
+    return selection[humanChoice.textContent];
 }
 
 function concat(choice){
@@ -27,18 +49,26 @@ function concat(choice){
 }
 
 function printChoices(humanChoice, computerChoice){
-    alert(`Human Chose ${concat(humanChoice)}  vs  Computer Chose ${concat(computerChoice)}`)
+    console.log(`human : ${humanChoice}, cpu: ${computerChoice}`);
+    // alert(`Human Chose ${concat(humanChoice)}  vs  Computer Chose ${concat(computerChoice)}`)
 }
 
 function printScore(){
     alert(`=>Human  vs  CPU\n   ${humanScore}          ${computerScore}`);
 }
 
-function playRound(humanChoice, computerChoice){
+function playRound(){
+    let humanChoice = getHumanChoice();
+    let computerChoice = getComputerChoice();
 
-    if(humanChoice != 'R' && humanChoice != 'P' && humanChoice != 'S'){
-        alert("Please provide valid input"); return;
-    }
+    console.log(computerChoice);
+
+    let cpu_selection = document.querySelector(".cpu");
+    cpu_selection.textContent = selection[computerChoice];
+
+    // if(humanChoice != 'R' && humanChoice != 'P' && humanChoice != 'S'){
+    //     alert("Please provide valid input"); return;
+    // }
 
     printChoices(humanChoice, computerChoice);
 
@@ -63,14 +93,35 @@ function playRound(humanChoice, computerChoice){
     printScore();
 }
 
-while(humanScore < 5 && computerScore < 5){
-    let human = getHumanChoice();
-    let cpu   = getComputerChoice();
-    playRound(human, cpu);
+// while(humanScore < 5 && computerScore < 5){
+//     let human = getHumanChoice();
+//     let cpu   = getComputerChoice();
+//     playRound(human, cpu);
+// }
+
+// if(humanScore > computerScore){
+//     alert("HUMAN WINS !!!");
+// }
+// else alert("CPU wins...");
+
+let rock_button = document.querySelector("#rock");
+let paper_button = document.querySelector("#paper");
+let sci_button = document.querySelector("#scissors");
+
+rock_button.onclick = () => {
+    let humanChoice = document.querySelector(".player.curr");
+    humanChoice.textContent = rock_button.textContent;
+}
+paper_button.onclick = () => {
+    let humanChoice = document.querySelector(".player.curr");
+    humanChoice.textContent = paper_button.textContent;
+}
+sci_button.onclick = () => {
+    let humanChoice = document.querySelector(".player.curr");
+    humanChoice.textContent = sci_button.textContent;
 }
 
-if(humanScore > computerScore){
-    alert("HUMAN WINS !!!");
-}
-else alert("CPU wins...");
+let play_button = document.querySelector("#play");
+play_button.onclick = () => { playRound() };
 
+// alert("im still here");
