@@ -1,6 +1,6 @@
 
-let humanScore = 0;
-let computerScore = 0;
+let humanCurrScore = 0;
+let CPUCurrScore = 0;
 
 let selection = {
     'R':'🪨',
@@ -54,7 +54,14 @@ function printChoices(humanChoice, computerChoice){
 }
 
 function printScore(){
-    alert(`=>Human  vs  CPU\n   ${humanScore}          ${computerScore}`);
+    alert(`=>Human  vs  CPU\n   ${humanCurrScore}          ${CPUCurrScore}`);
+}
+
+function updateScore(){
+    let human_score = document.querySelector("#human-score");
+    let computer_score = document.querySelector("#cpu-score");
+    human_score.textContent = `Human: ${humanCurrScore}`;
+    computer_score.textContent = `CPU: ${CPUCurrScore}`
 }
 
 function playRound(){
@@ -77,29 +84,31 @@ function playRound(){
         return;
     }
     if(humanChoice === 'R'){
-        if(computerChoice === 'S') humanScore += 1;
-        else computerScore += 1;
+        if(computerChoice === 'S') humanCurrScore += 1;
+        else CPUCurrScore += 1;
     }
     else if(humanChoice === 'P'){
-        if(computerChoice === 'R') humanScore += 1;
-        else computerScore += 1;
+        if(computerChoice === 'R') humanCurrScore += 1;
+        else CPUCurrScore += 1;
     }
 
     else if(humanChoice === 'S'){
-        if(computerChoice === 'P') humanScore += 1;
-        else computerScore += 1;
+        if(computerChoice === 'P') humanCurrScore += 1;
+        else CPUCurrScore += 1;
     }
 
-    printScore();
+    // printScore();
+    updateScore();
+
 }
 
-// while(humanScore < 5 && computerScore < 5){
+// while(humanCurrScore < 5 && CPUCurrScore < 5){
 //     let human = getHumanChoice();
 //     let cpu   = getComputerChoice();
 //     playRound(human, cpu);
 // }
 
-// if(humanScore > computerScore){
+// if(humanCurrScore > CPUCurrScore){
 //     alert("HUMAN WINS !!!");
 // }
 // else alert("CPU wins...");
